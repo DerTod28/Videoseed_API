@@ -1,5 +1,5 @@
 from flask import Flask
-from blueprint import bp, swaggerui_blueprint
+from flask_app.blueprint import bp, swaggerui_blueprint
 
 app = Flask(__name__)
 app.register_blueprint(bp)

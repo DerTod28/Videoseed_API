@@ -11,3 +11,8 @@ ndocker-dev:
 .PHONY: precommit
 precommit:
 	pre-commit run --all-files
+
+ndocker-test-no-cache:
+	docker-compose down -v --rmi local \
+	&& docker-compose -f docker-compose.yaml -f docker-compose-tests.yaml build --no-cache \
+	&& docker-compose -f docker-compose.yaml -f docker-compose-tests.yaml up

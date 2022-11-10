@@ -1,0 +1,10 @@
+services:
+  app-tests-runner:
+    build:
+      context: .
+      dockerfile:
+        docker/test/Dockerfile
+    depends_on:
+      - app
+    labels:
+      NAME: "tests"

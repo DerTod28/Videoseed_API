@@ -2,9 +2,9 @@ import http
 
 import requests
 
-host = 'http://127.0.0.1:5000'
+host = 'http://app:5000'
 
-url_api = f'{host}/api/v1/videos/'
+url_api = f'{host}/v1/videos/'
 
 
 def test_video_meta():
