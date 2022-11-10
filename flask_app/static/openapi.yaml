@@ -1,0 +1,115 @@
+---
+openapi: 3.0.0
+info:
+  title: Videoseed
+  description: The API for the Videoseed project
+  version: 1.0.0
+paths:
+  /api/v1/videos/{id}:
+    get:
+      tags:
+      - Videos
+      description: returns youtube video information
+      operationId: getVideos
+      parameters:
+      - name: id
+        in: path
+        description: youtube video id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: str
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoDetail'
+        404:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/videos/{id}/download:
+    get:
+      tags:
+      - Videos download
+      description: returns locally downloaded youtube video
+      operationId: getVideosDownload
+      parameters:
+      - name: id
+        in: path
+        description: youtube video download by id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: str
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileResponse'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/v1/videos/{id}/thumbnail:
+    get:
+      tags:
+      - Videos thumbnail download
+      description: returns locally downloaded youtube video thumbnail
+      operationId: getVideosDownloadThumbnail
+      parameters:
+      - name: id
+        in: path
+        description: youtube video id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: str
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileResponse'
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    VideoDetail:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Some video title
+        description:
+          type: string
+          example: Some video description
+        duration:
+          type: string
+          example: PT2M45S
+
+    FileResponse:
+      type: string
+      format: binary
+
+    ErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          example: Error occurred
